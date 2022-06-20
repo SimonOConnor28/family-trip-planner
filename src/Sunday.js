@@ -2,9 +2,9 @@ import firebase from "./firebase";
 import { getDatabase, onValue, ref, push } from "firebase/database";
 import { useState, useEffect } from "react";
 
-const Saturday = () => {
-  const [saturdayItems, setSaturdayItems] = useState([]);
-  const [userItemSaturday, setUserItemSaturday] = useState("");
+const Sunday = () => {
+  const [sundayItems, setSundayItems] = useState([]);
+  const [userItemSunday, setUserItemSunday] = useState("");
 
   useEffect(() => {
     const database = getDatabase(firebase);
@@ -18,12 +18,12 @@ const Saturday = () => {
       for (let key in data) {
         newState.push(data[key]);
       }
-      setSaturdayItems(newState);
+      setSundayItems(newState);
     });
   }, []);
 
   const handleInputChange = (event) => {
-    setUserItemSaturday(event.target.value);
+    setUserItemSunday(event.target.value);
   };
 
   const handleClick = (event) => {
@@ -32,19 +32,15 @@ const Saturday = () => {
     const database = getDatabase(firebase);
     const dbRef = ref(database);
 
-    push(dbRef, { day: "saturday", item: userItemSaturday });
+    push(dbRef, { day: "sunday", item: userItemSunday });
 
-    setUserItemSaturday("");
+    setUserItemSunday("");
   };
 
-  const removeClickHandle = (event) => {
-
-  }
-
   return (
-    <div className="saturdayBackground sectionSpace">
+    <div className="sundayBackground sectionSpace">
       <div className="wrapper">
-        <h2>Saturday</h2>
+        <h2>Sunday</h2>
         <form action="submit">
           <div className="flex">
             <label htmlFor="newItem"></label>
@@ -53,21 +49,22 @@ const Saturday = () => {
               id="newItem"
               placeholder="Add what you are bringing here"
               onChange={handleInputChange}
-              value={userItemSaturday}
+              value={userItemSunday}
             />
             <button onClick={handleClick}>Add Item here</button>
           </div>
         </form>
         <div>
           <ul>
-            {saturdayItems
-              .filter((item) => item.day === "saturday")
+            {sundayItems
+              .filter((item) => item.day === "sunday")
               .map((item) => {
+                console.log(item, item.key)
                 return (
                   <li key={item.item}>
                     {item.item}
-                    <button onClick={removeClickHandle} className="delete">
-                      remove
+                    <button className="delete">
+                      <i className="fa-solid fa-trash-can"></i>
                     </button>
                   </li>
                 );
@@ -79,4 +76,4 @@ const Saturday = () => {
   );
 };
 
-export default Saturday;
+export default Sunday;

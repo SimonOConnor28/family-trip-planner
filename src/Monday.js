@@ -1,5 +1,5 @@
 import firebase from "./firebase";
-import { getDatabase, onValue, ref, push } from "firebase/database";
+import { getDatabase, onValue, ref, push, remove } from "firebase/database";
 import { useState, useEffect } from "react";
 
 
@@ -35,11 +35,17 @@ import { useState, useEffect } from "react";
             const database = getDatabase(firebase);
             const dbRef = ref(database);
 
-            push(dbRef, {day:'monday', item:userItem});
+            push(dbRef, { day: "monday", item: userItem });
 
             setUserItem("");
         };
 
+        const handleRemoveClick = (newItem) => {
+          const database = getDatabase(firebase);
+          const dbRef = ref(database, `/${newItem}`);
+          console.log(database);
+          remove(dbRef.id)
+        }
         return (
           <div className="mondayBack sectionSpace">
             <div className="wrapper">
@@ -52,7 +58,7 @@ import { useState, useEffect } from "react";
                   <input
                     type="text"
                     id="newItem"
-                    placeholder="Enter here"
+                    placeholder="Add what you are bringing here"
                     onChange={handleInputChange}
                     value={userItem}
                   />
@@ -63,8 +69,11 @@ import { useState, useEffect } from "react";
                 {/* mapping through the array in state  */}
                 {items.filter((item) => item.day === "monday").map((item) => {
                     return (
-                      <li key={item.key}>
+                      <li key={item.item}>
                         {item.item}
+                        <button onClick={() => handleRemoveClick(item.item)}>
+                          Remove
+                        </button>
                       </li>
                     );
                   })}

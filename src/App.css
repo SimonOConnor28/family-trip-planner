@@ -54,7 +54,7 @@ div.h1Center h1 {
 
 ul {
   border: 1px solid black;
-  width: 400px;
+  width: 420px;
   margin: 0 auto;
   padding: 10px;
 }
@@ -64,19 +64,31 @@ ul {
 }
 
 .mondayBack {
-  background-color: #e76f51;
+  background-color: #ffc300;
 }
 
 .tuesBackground{
-  background-color: #f4a261;
+  background-color: #ffb700;
 }
 
 .wednesBackground {
-  background-color: #e9c46a;
+  background-color: #ffaa00;
 }
 
 .thursBackground {
-  background-color: #e07a5f;
+  background-color: #ffa200;
+}
+
+.fridayBackground{
+  background-color: #ff8800;
+}
+
+.saturdayBackground {
+  background-color: #f25c54;
+}
+
+.sundayBackground {
+  background-color: #ff4800;
 }
 
 .App {

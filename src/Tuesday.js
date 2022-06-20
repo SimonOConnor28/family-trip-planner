@@ -61,11 +61,12 @@ const Tuesday = () => {
                             .filter((item) => item.day === "tuesday")
                             .map((item) => {
                                 return (
-                                    <li key={item.key}>
+                                    <li key={item.item}>
                                         {item.item}
-                                        <button className="delete">
-                                            <i className="fa-solid fa-trash-can"></i>
-                                        </button>
+                                        {/* <button
+                                            onClick={() =>handleRemoveClick(item.item)}>
+                                            Remove
+                                        </button> */}
                                     </li>
                                 );
                             })}

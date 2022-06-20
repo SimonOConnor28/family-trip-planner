@@ -60,7 +60,7 @@ const Wednesday = () => {
               .filter((item) => item.day === "wednesday")
               .map((item) => {
                 return (
-                  <li key={item.key}>
+                  <li key={item.item}>
                     {item.item}
                     <button className="delete">
                       <i className="fa-solid fa-trash-can"></i>

@@ -6,6 +6,7 @@ import Wednesday from './Wednesday';
 import Thursday from './Thursday';
 import Friday from './Friday';
 import Saturday from './Saturday';
+import Sunday from './Sunday';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Thursday />
       <Friday />
       <Saturday />
+      <Sunday />
     </div>
   );
 }

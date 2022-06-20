@@ -38,36 +38,40 @@ const Friday = () => {
     };
 
     return (
-        <div>
-            <h2>Friday</h2>
-            <form action="submit">
-                <div className="flex">
-                    <label htmlFor="newItem"></label>
-                    <input
-                        type="text"
-                        id="newItem"
-                        placeholder="Add what you are bringing here"
-                        onChange={handleInputChange}
-                        value={userItemFriday}
-                    />
-                    <button onClick={handleClick}>Add Item here</button>
+        <div className="fridayBackground sectionSpace">
+            <div className="wrapper">
+                <h2>Friday</h2>
+                <div>
+                <form action="submit">
+                    <div className="flex">
+                        <label htmlFor="newItem"></label>
+                        <input
+                            type="text"
+                            id="newItem"
+                            placeholder="Add what you are bringing here"
+                            onChange={handleInputChange}
+                            value={userItemFriday}
+                        />
+                        <button onClick={handleClick}>Add Item here</button>
+                    </div>
+                </form>
+                <div>
+                    <ul>
+                        {fridayItems
+                            .filter((item) => item.day === "friday")
+                            .map((item) => {
+                                return (
+                                    <li key={item.item}>
+                                        {item.item}
+                                        <button className="delete">
+                                            <i className="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </li>
+                                );
+                            })}
+                    </ul>
+                    </div>
                 </div>
-            </form>
-            <div>
-                <ul>
-                    {fridayItems
-                        .filter((item) => item.day === "friday")
-                        .map((item) => {
-                            return (
-                                <li key={item.key}>
-                                    {item.item}
-                                    <button className="delete">
-                                        <i className="fa-solid fa-trash-can"></i>
-                                    </button>
-                                </li>
-                            );
-                        })}
-                </ul>
             </div>
         </div>
     );
