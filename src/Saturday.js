@@ -1,5 +1,5 @@
 import firebase from "./firebase";
-import { getDatabase, onValue, ref, push } from "firebase/database";
+import { getDatabase, onValue, ref, push, remove } from "firebase/database";
 import { useState, useEffect } from "react";
 
 const Saturday = () => {
@@ -7,16 +7,17 @@ const Saturday = () => {
   const [userItemSaturday, setUserItemSaturday] = useState("");
 
   useEffect(() => {
+    //variable that hold database detail
     const database = getDatabase(firebase);
-    const dbRef = ref(database);
+    const dbRef = ref(database, "/saturday");
 
     onValue(dbRef, (response) => {
       const newState = [];
 
-      const data = response.val([]);
+      const data = response.val();
 
       for (let key in data) {
-        newState.push(data[key]);
+        newState.push({ ...data[key], key: key });
       }
       setSaturdayItems(newState);
     });
@@ -30,21 +31,23 @@ const Saturday = () => {
     event.preventDefault();
 
     const database = getDatabase(firebase);
-    const dbRef = ref(database);
-
-    push(dbRef, { day: "saturday", item: userItemSaturday });
+    const dbRef = ref(database, "/saturday");
+    push(dbRef, { item: userItemSaturday });
 
     setUserItemSaturday("");
   };
 
-  const removeClickHandle = (event) => {
-
-  }
-
+  const handleRemoveClick = (itemKey) => {
+    const database = getDatabase(firebase);
+    const dbRef = ref(database, `/saturday/${itemKey}`);
+    remove(dbRef);
+  };
   return (
-    <div className="saturdayBackground sectionSpace">
+    <div className="tuesBackground sectionSpace">
       <div className="wrapper">
-        <h2>Saturday</h2>
+        <div>
+          <h2 className="torch">Saturday</h2>
+        </div>
         <form action="submit">
           <div className="flex">
             <label htmlFor="newItem"></label>
@@ -58,22 +61,19 @@ const Saturday = () => {
             <button onClick={handleClick}>Add Item here</button>
           </div>
         </form>
-        <div>
-          <ul>
-            {saturdayItems
-              .filter((item) => item.day === "saturday")
-              .map((item) => {
-                return (
-                  <li key={item.item}>
-                    {item.item}
-                    <button onClick={removeClickHandle} className="delete">
-                      remove
-                    </button>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
+        <ul>
+          {/* mapping through the array in state  */}
+          {saturdayItems.map((item) => {
+            return (
+              <li key={item.key}>
+                {item.item}
+                <button onClick={() => handleRemoveClick(item.key)}>
+                  <i className="fa-solid fa-trash-can"></i>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

@@ -1,80 +1,85 @@
 import firebase from "./firebase";
-import { getDatabase, onValue, ref, push } from "firebase/database";
+import { getDatabase, onValue, ref, push, remove } from "firebase/database";
 import { useState, useEffect } from "react";
 
 const Friday = () => {
-    const [fridayItems, setFridayItems] = useState([]);
-    const [userItemFriday, setUserItemFriday] = useState("");
+  const [fridayItems, setFridayItems] = useState([]);
+  const [userItemFriday, setUserItemFriday] = useState("");
 
-    useEffect(() => {
-        const database = getDatabase(firebase);
-        const dbRef = ref(database);
+  useEffect(() => {
+    //variable that hold database detail
+    const database = getDatabase(firebase);
+    const dbRef = ref(database, "/friday");
 
-        onValue(dbRef, (response) => {
-            const newState = [];
+    onValue(dbRef, (response) => {
+      const newState = [];
 
-            const data = response.val([]);
+      const data = response.val();
 
-            for (let key in data) {
-                newState.push(data[key]);
-            }
-            setFridayItems(newState);
-        });
-    }, []);
+      for (let key in data) {
+        newState.push({ ...data[key], key: key });
+      }
+      setFridayItems(newState);
+    });
+  }, []);
 
-    const handleInputChange = (event) => {
-        setUserItemFriday(event.target.value);
-    };
+  const handleInputChange = (event) => {
+    setUserItemFriday(event.target.value);
+  };
 
-    const handleClick = (event) => {
-        event.preventDefault();
+  const handleClick = (event) => {
+    event.preventDefault();
 
-        const database = getDatabase(firebase);
-        const dbRef = ref(database);
+    const database = getDatabase(firebase);
+    const dbRef = ref(database, "/friday");
+    push(dbRef, { item: userItemFriday });
 
-        push(dbRef, { day: "friday", item: userItemFriday });
+    setUserItemFriday("");
+  };
 
-        setUserItemFriday("");
-    };
-
-    return (
-        <div className="fridayBackground sectionSpace">
-            <div className="wrapper">
-                <h2>Friday</h2>
-                <div>
-                <form action="submit">
-                    <div className="flex">
-                        <label htmlFor="newItem"></label>
-                        <input
-                            type="text"
-                            id="newItem"
-                            placeholder="Add what you are bringing here"
-                            onChange={handleInputChange}
-                            value={userItemFriday}
-                        />
-                        <button onClick={handleClick}>Add Item here</button>
-                    </div>
-                </form>
-                <div>
-                    <ul>
-                        {fridayItems
-                            .filter((item) => item.day === "friday")
-                            .map((item) => {
-                                return (
-                                    <li key={item.item}>
-                                        {item.item}
-                                        <button className="delete">
-                                            <i className="fa-solid fa-trash-can"></i>
-                                        </button>
-                                    </li>
-                                );
-                            })}
-                    </ul>
-                    </div>
-                </div>
-            </div>
+  const handleRemoveClick = (itemKey) => {
+    const database = getDatabase(firebase);
+    const dbRef = ref(database, `/friday/${itemKey}`);
+    remove(dbRef);
+  };
+  return (
+    <div className="tuesBackground sectionSpace">
+      <div className="wrapper">
+        <div>
+          <h2 className="torch">
+            <i className="fa-solid fa-champagne-glasses"></i>Friday
+            <i className="fa-solid fa-champagne-glasses"></i>
+          </h2>
         </div>
-    );
+        <form action="submit">
+          <div className="flex">
+            <label htmlFor="newItem"></label>
+            <input
+              type="text"
+              id="newItem"
+              placeholder="Add what you are bringing here"
+              onChange={handleInputChange}
+              value={userItemFriday}
+            />
+            <button onClick={handleClick}>Add Item here</button>
+          </div>
+        </form>
+        <ul>
+          {/* mapping through the array in state  */}
+          {fridayItems.map((item) => {
+            return (
+              <li key={item.key}>
+                {item.item}
+                <button onClick={() => handleRemoveClick(item.key)}>
+                  <i className="fa-solid fa-trash-can"></i>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </div>
+  );
 };
 
 export default Friday;

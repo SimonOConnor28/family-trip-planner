@@ -4,83 +4,82 @@ import { useState, useEffect } from "react";
 
 
         const Monday = () => {
-        // set userName to state
-        const [items, setItem] = useState([]);
-        const [userItem, setUserItem] = useState("");
+          // set userName to state
+          const [mondayItems, setMondayItems] = useState([]);
+          const [userItemMonday, setUserItemMonday] = useState("");
 
-        useEffect( () => {
+          useEffect(() => {
             //variable that hold database detail
             const database = getDatabase(firebase);
-            const dbRef = ref(database);
+            const dbRef = ref(database, "/monday");
 
             onValue(dbRef, (response) => {
-            const newState = [];
+              const newState = [];
 
-            const data = response.val();
+              const data = response.val();
 
-            for (let key in data) {
-                newState.push(data[key]);
-            }
-            setItem(newState);
+              for (let key in data) {
+                newState.push({ ...data[key], key: key });
+              }
+              setMondayItems(newState);
             });
-        }, []);
+          }, []);
 
-        const handleInputChange = (event) => {
-            setUserItem(event.target.value);
-        };
+          const handleInputChange = (event) => {
+            setUserItemMonday(event.target.value);
+          };
 
-        const handleClick = (event) => {
+          const handleClick = (event) => {
             event.preventDefault();
 
             const database = getDatabase(firebase);
-            const dbRef = ref(database);
+            const dbRef = ref(database, "/monday");
+            push(dbRef, { item: userItemMonday });
 
-            push(dbRef, { day: "monday", item: userItem });
+            setUserItemMonday("");
+          };
 
-            setUserItem("");
-        };
-
-        const handleRemoveClick = (newItem) => {
-          const database = getDatabase(firebase);
-          const dbRef = ref(database, `/${newItem}`);
-          console.log(database);
-          remove(dbRef.id)
-        }
-        return (
-          <div className="mondayBack sectionSpace">
-            <div className="wrapper">
-              <div>
-                <h2 className="torch">Monday</h2>
-              </div>
-              <form action="submit">
-                <div className="flex">
-                  <label htmlFor="newItem"></label>
-                  <input
-                    type="text"
-                    id="newItem"
-                    placeholder="Add what you are bringing here"
-                    onChange={handleInputChange}
-                    value={userItem}
-                  />
-                <button onClick={handleClick}>Add Item here</button>
+          const handleRemoveClick = (itemKey) => {
+            const database = getDatabase(firebase);
+            const dbRef = ref(database, `/monday/${itemKey}`);
+            remove(dbRef);
+          };
+          return (
+            <div className="tuesBackground sectionSpace">
+              <div className="wrapper">
+                <div>
+                  <h2 className="torch">
+                    <i className="fa-solid fa-campground"></i>Monday
+                  </h2>
                 </div>
-              </form>
-              <ul>
-                {/* mapping through the array in state  */}
-                {items.filter((item) => item.day === "monday").map((item) => {
+                <form action="submit">
+                  <div className="flex">
+                    <label htmlFor="newItem"></label>
+                    <input
+                      type="text"
+                      id="newItem"
+                      placeholder="Add what you are bringing here"
+                      onChange={handleInputChange}
+                      value={userItemMonday}
+                    />
+                    <button onClick={handleClick}>Add Item here</button>
+                  </div>
+                </form>
+                <ul>
+                  {/* mapping through the array in state  */}
+                  {mondayItems.map((item) => {
                     return (
-                      <li key={item.item}>
+                      <li key={item.key}>
                         {item.item}
-                        <button onClick={() => handleRemoveClick(item.item)}>
-                          Remove
+                        <button onClick={() => handleRemoveClick(item.key)}>
+                          <i className="fa-solid fa-trash-can"></i>
                         </button>
                       </li>
                     );
                   })}
-              </ul>
+                </ul>
+              </div>
             </div>
-          </div>
-        );
+          );
         };
-
 export default Monday;

@@ -4,6 +4,12 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&display=swap');
+
+body {background: rgb(131, 58, 180);
+  background: linear-gradient(180deg, rgba(131, 58, 180, 1) 20%, rgba(252, 176, 69, 1) 96%);
+}
+
 html {
   font-size: 125%;
 }
@@ -42,6 +48,11 @@ div.h1Center {
   height: 10em;
   position: relative;
 }
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem;
+  color: white;
+}
 
 div.h1Center h1 {
   margin: 0;
@@ -54,16 +65,30 @@ div.h1Center h1 {
 
 ul {
   border: 1px solid black;
-  width: 420px;
-  margin: 0 auto;
+  margin: 15px auto;
   padding: 10px;
+}
+
+.listFlex {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+}
+
+p {
+  word-wrap: anywhere;
+}
+
+.remove{
+  width: 60px;
 }
 
 .sectionSpace {
   padding-bottom: 40px;
 }
 
-.mondayBack {
+/* .mondayBack {
   background-color: #ffc300;
 }
 
@@ -71,7 +96,7 @@ ul {
   background-color: #ffb700;
 }
 
-.wednesBackground {
+.wednesdayBackground {
   background-color: #ffaa00;
 }
 
@@ -89,7 +114,7 @@ ul {
 
 .sundayBackground {
   background-color: #ff4800;
-}
+} */
 
 .App {
   text-align: center;
