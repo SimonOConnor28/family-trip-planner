@@ -22,10 +22,12 @@ h4{
   padding: 0;
 }
 
-li {
-  list-style: circle;
-  word-wrap: break-word;
-  text-align: center;
+
+
+@keyframes text-slide-up {
+  from {
+    padding-top: 4em;
+  }
 }
 
 .wrapper {
@@ -57,7 +59,7 @@ h1 {
 div.h1Center h1 {
   margin: 0;
   position: absolute;
-  top: 160%;
+  top: 120%;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%)
@@ -67,6 +69,18 @@ ul {
   border: 1px solid black;
   margin: 15px auto;
   padding: 10px;
+}
+
+input {
+  margin-right: 5px;
+  border-radius: 20px;
+  border: none;
+  height: 30px;
+  padding-left: 10px;
+}
+
+input::placeholder {
+  overflow: visible;
 }
 
 .listFlex {
@@ -80,46 +94,23 @@ p {
   word-wrap: anywhere;
 }
 
-.remove{
-  width: 60px;
+.btnAdd {
+  border-radius: 50px;
+  border-style: none;
+}
+
+.btnAdd:hover {
+  background-color: rebeccapurple;
+  color: white;
 }
 
 .sectionSpace {
   padding-bottom: 40px;
 }
 
-/* .mondayBack {
-  background-color: #ffc300;
-}
-
-.tuesBackground{
-  background-color: #ffb700;
-}
-
-.wednesdayBackground {
-  background-color: #ffaa00;
-}
-
-.thursBackground {
-  background-color: #ffa200;
-}
-
-.fridayBackground{
-  background-color: #ff8800;
-}
-
-.saturdayBackground {
-  background-color: #f25c54;
-}
-
-.sundayBackground {
-  background-color: #ff4800;
-} */
-
 .App {
   text-align: center;
 }
-
 
 .mon {
   display: flex;
@@ -127,4 +118,53 @@ p {
   width: fit-content;
   align-items: center;
   margin: 0 auto;
+}
+
+
+
+li {
+  list-style-type: circle;
+    list-style-position: inside;
+    word-wrap: break-word;
+    text-align: center;
+  -webkit-animation: fade-in 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: fade-in 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    letter-spacing: 1em;
+    -webkit-transform: translateZ(300px);
+    transform: translateZ(300px);
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateZ(12px);
+    transform: translateZ(12px);
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    letter-spacing: 1em;
+    -webkit-transform: translateZ(300px);
+    transform: translateZ(300px);
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+
+  100% {
+    -webkit-transform: translateZ(12px);
+    transform: translateZ(12px);
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
 }

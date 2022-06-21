@@ -46,7 +46,10 @@ const Saturday = () => {
     <div className="tuesBackground sectionSpace">
       <div className="wrapper">
         <div>
-          <h2 className="torch">Saturday</h2>
+          <h2 className="torch">
+            <i className="fa-solid fa-signs-post"></i> Saturday
+             <i className="fa-solid fa-signs-post"></i>
+          </h2>
         </div>
         <form action="submit">
           <div className="flex">
@@ -54,11 +57,11 @@ const Saturday = () => {
             <input
               type="text"
               id="newItem"
-              placeholder="Add what you are bringing here"
+              placeholder="Add Item here"
               onChange={handleInputChange}
               value={userItemSaturday}
             />
-            <button onClick={handleClick}>Add Item here</button>
+            <button className="btnAdd" onClick={handleClick}>Add to list</button>
           </div>
         </form>
         <ul>

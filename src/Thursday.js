@@ -57,11 +57,13 @@ const Thursday = () => {
             <input
               type="text"
               id="newItem"
-              placeholder="Add what you are bringing here"
+              placeholder="Add List item"
               onChange={handleInputChange}
               value={userItemThursday}
             />
-            <button onClick={handleClick}>Add Item here</button>
+            <button className="btnAdd" onClick={handleClick}>
+              Add to list
+            </button>
           </div>
         </form>
         <ul>
