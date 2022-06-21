@@ -90,6 +90,10 @@ p {
   word-wrap: anywhere;
 }
 
+.removeBtn {
+  margin-left: 20px;
+}
+
 .btnAdd {
   border-radius: 50px;
   border-style: none;

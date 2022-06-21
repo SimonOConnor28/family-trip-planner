@@ -74,7 +74,10 @@ const Wednesday = () => {
             return (
               <li key={item.key}>
                 {item.item}
-                <button onClick={() => handleRemoveClick(item.key)}>
+                <button
+                  className="removeBtn"
+                  onClick={() => handleRemoveClick(item.key)}
+                >
                   <i className="fa-solid fa-trash-can"></i>
                 </button>
               </li>
