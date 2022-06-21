@@ -7,7 +7,7 @@ import Thursday from './Thursday';
 import Friday from './Friday';
 import Saturday from './Saturday';
 import Sunday from './Sunday';
-
+import Footer from './Footer';
 function App() {
 
   return (
@@ -20,6 +20,7 @@ function App() {
       <Friday />
       <Saturday />
       <Sunday />
+      <Footer />
     </div>
   );
 }

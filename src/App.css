@@ -15,6 +15,11 @@ html {
   font-size: 125%;
 }
 
+a {
+  text-decoration: underline;
+  color: black;
+}
+
 h1,
 h2,
 h3,
