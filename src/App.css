@@ -5,6 +5,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lora:ital@0;1&family=Raleway:wght@700&display=swap');
 
 body {background: rgb(131, 58, 180);
   background: linear-gradient(180deg, rgba(131, 58, 180, 1) 20%, rgba(252, 176, 69, 1) 96%);
@@ -22,14 +23,6 @@ h4{
   padding: 0;
 }
 
-
-
-@keyframes text-slide-up {
-  from {
-    padding-top: 4em;
-  }
-}
-
 .wrapper {
   max-width: 1200px;
   width: 90%;
@@ -45,7 +38,6 @@ header {
   background-position: center;
 }
 
-
 div.h1Center {
   height: 10em;
   position: relative;
@@ -56,6 +48,9 @@ h1 {
   color: white;
 }
 
+h2{
+  font-family: 'Indie Flower', cursive;
+}
 div.h1Center h1 {
   margin: 0;
   position: absolute;
@@ -73,6 +68,7 @@ ul {
 
 input {
   margin-right: 5px;
+  margin-bottom: 5px;
   border-radius: 20px;
   border: none;
   height: 30px;
