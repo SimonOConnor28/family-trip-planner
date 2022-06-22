@@ -44,7 +44,7 @@ const Wednesday = () => {
     remove(dbRef);
   };
   return (
-    <div className="wednesdayBackground sectionSpace">
+    <div className="sectionSpace">
       <div className="wrapper">
         <div>
           <h2 className="torch">

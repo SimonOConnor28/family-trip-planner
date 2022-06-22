@@ -3,7 +3,7 @@ const Footer = () => {
       <footer>
         <div className="wrapper">
           <p>
-            Created by Simon O'Connor at
+            Made by Simon O'Connor at
             <a href="https://junocollege.com/"> Juno College</a>
           </p>
         </div>
