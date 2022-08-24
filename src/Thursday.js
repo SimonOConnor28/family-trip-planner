@@ -57,7 +57,7 @@ const Thursday = () => {
             <input
               type="text"
               id="newItem"
-              placeholder="Add List item"
+              placeholder="Add Item here"
               onChange={handleInputChange}
               value={userItemThursday}
             />
